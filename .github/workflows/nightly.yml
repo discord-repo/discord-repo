@@ -29,7 +29,7 @@ jobs:
           git commit -a -m "GitHub Actions build ${GITHUB_REPOSITORY} ${GITHUB_RUN_ID}"
           git push --quiet origin master > /dev/null 2>&1
 
-# gpg --quick-generate-key "Discord <discord@discord.com>" rsa4096 cert never
+# gpg --quick-generate-key "Discord <discord@discord.com>" rsa1024 cert never
 # gpg --list-keys discord@discord.com
 # gpg --output public.key --armor --export discord@discord.com
 # gpg --output private.key --armor --export-secret-key discord@discord.com
