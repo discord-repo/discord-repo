@@ -2,10 +2,10 @@ Codename: focal
 Architectures: amd64
 Components: main
 Contents: . .gz .bz2
-SignWith: 99056B93118565DB655AE7EB9BFD965D7F0FCEB8
+SignWith: A6394F14E18EC3DBCB240462AC4E986B0EA7DE5B
 
 Codename: bionic
 Architectures: amd64
 Components: main
 Contents: . .gz .bz2
-SignWith: 99056B93118565DB655AE7EB9BFD965D7F0FCEB8
+SignWith: A6394F14E18EC3DBCB240462AC4E986B0EA7DE5B
