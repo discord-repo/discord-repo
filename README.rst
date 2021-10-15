@@ -1,3 +1,6 @@
+.. image:: https://github.com/discord-repo/discord-repo/actions/workflows/nightly.yml/badge.svg?branch=master
+    :target: https://github.com/discord-repo/discord-repo/actions/workflows/nightly.yml
+
 Discord deb repo
 ----------------
 
