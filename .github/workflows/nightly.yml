@@ -11,6 +11,8 @@ jobs:
         run: |
           sudo apt-get -y install reprepro wget
           for pkgver in 0.0.20 0.0.19 0.0.18 0.0.17 0.0.16; do wget -c https://dl.discordapp.net/apps/linux/${pkgver}/discord-${pkgver}.deb && break; done
+          gpg --import private.key
+          gpg --list-keys
           for code in bionic focal; do reprepro --basedir ubuntu includedeb ${code} discord-${pkgver}.deb; done
       - name: Upload
         if: ${{ github.ref == 'refs/heads/master' }}
@@ -18,7 +20,7 @@ jobs:
           git clone --depth 1 https://${{ secrets.GH_TOKEN }}@github.com/discord-repo/discord-repo.github.io.git /tmp/io
           #rm -rf /tmp/io/apt
           mkdir -p /tmp/io/apt
-          cp -rv ubuntu /tmp/io/apt
+          cp -rv ubuntu public.key /tmp/io/apt
           cd /tmp/io
           touch .nojekyll
           git config user.email "support@gh.com"
@@ -26,3 +28,7 @@ jobs:
           git add -A .
           git commit -a -m "GitHub Actions build ${GITHUB_REPOSITORY} ${GITHUB_RUN_ID}"
           git push --quiet origin master > /dev/null 2>&1
+
+# gpg --quick-generate-key "Discord <discord@discord.com>" rsa4096 cert never
+# gpg --output public.key --armor --export discord@discord.com
+# gpg --output private.key --armor --export-secret-key discord@discord.com
