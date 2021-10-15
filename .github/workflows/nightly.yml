@@ -33,5 +33,5 @@ jobs:
 # gpg --list-keys discord@discord.com
 # gpg --output public.key --armor --export discord@discord.com
 # gpg --output private.key --armor --export-secret-key discord@discord.com
-# gpg --delete-secret-key discord@discord.com
-# gpg --delete-secret-key discord@discord.com
+# gpg --delete-secret-keys discord@discord.com
+# gpg --delete-keys discord@discord.com
