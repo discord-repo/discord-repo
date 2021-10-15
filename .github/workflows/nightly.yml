@@ -1,0 +1,28 @@
+name: Nightly build
+#on:
+  #schedule:
+    #- cron:  '0 0 * * 5'
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          apt-get -y install reprepro wget
+          for pkgver in 0.0.20 0.0.19 0.0.18 0.0.17 0.0.16; do wget -c https://dl.discordapp.net/apps/linux/${pkgver}/discord-${pkgver}.deb && break; done
+          for code in bionic focal do; reprepro --basedir ubuntu includedeb ${code} discord-${pkgver}.deb
+      - name: Upload
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          git clone --depth 1 https://${{ secrets.GH_TOKEN }}@github.com/discord-repo/discord-repo.github.io.git /tmp/io
+          #rm -rf /tmp/io/apt
+          mkdir -p /tmp/io/apt
+          cp -rv ubuntu /tmp/io/apt
+          cd /tmp/io
+          touch .nojekyll
+          git config user.email "support@gh.com"
+          git config user.name "GitHub Actions"
+          git add -A .
+          git commit -a -m "GitHub Actions build ${GITHUB_REPOSITORY} ${GITHUB_RUN_ID}"
+          git push --quiet origin master > /dev/null 2>&1
