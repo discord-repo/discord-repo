@@ -30,5 +30,6 @@ jobs:
           git push --quiet origin master > /dev/null 2>&1
 
 # gpg --quick-generate-key "Discord <discord@discord.com>" rsa4096 cert never
+# gpg --list-keys discord@discord.com
 # gpg --output public.key --armor --export discord@discord.com
 # gpg --output private.key --armor --export-secret-key discord@discord.com
