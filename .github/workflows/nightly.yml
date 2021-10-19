@@ -14,6 +14,8 @@ jobs:
           gpg --import private.key
           gpg --list-keys
           for code in bionic focal; do reprepro --basedir ubuntu includedeb ${code} discord-${pkgver}.deb; done
+          echo "::set-output name=version::$(pkgver)"
+      - id: build
       - name: Upload
         if: ${{ github.ref == 'refs/heads/master' }}
         run: |
@@ -22,6 +24,8 @@ jobs:
           mkdir -p /tmp/io/apt
           cp -rv ubuntu public.key /tmp/io/apt
           cd /tmp/io
+          echo "${{ steps.build.version }}" > current_version.txt
+          git diff --cached current_version.txt && exit 0
           touch .nojekyll
           git config user.email "support@gh.com"
           git config user.name "GitHub Actions"
