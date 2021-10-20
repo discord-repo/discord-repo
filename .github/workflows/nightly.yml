@@ -15,7 +15,7 @@ jobs:
           gpg --list-keys
           for code in bionic focal; do reprepro --basedir ubuntu includedeb ${code} discord-${pkgver}.deb; done
           echo "::set-output name=version::$(pkgver)"
-      - id: build
+        id: build
       - name: Upload
         if: ${{ github.ref == 'refs/heads/master' }}
         run: |
