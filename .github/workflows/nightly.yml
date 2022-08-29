@@ -27,7 +27,7 @@ jobs:
           cd /tmp/io
           cp /tmp/current_version.txt .
           echo "diff"
-          git diff current_version.txt && exit 0
+          git diff --exit-code current_version.txt && exit 0
           touch .nojekyll
           git config user.email "support@gh.com"
           git config user.name "GitHub Actions"
