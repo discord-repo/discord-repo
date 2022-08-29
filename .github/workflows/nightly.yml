@@ -10,11 +10,11 @@ jobs:
       - name: Build
         run: |
           sudo apt-get -y install reprepro wget
-          for pkgver in 0.0.25 0.0.24 0.0.23 0.0.22 0.0.21 0.0.20 0.0.19 0.0.18; do wget -c https://dl.discordapp.net/apps/linux/${pkgver}/discord-${pkgver}.deb && break; done
+          for pkgver in 0.0.25 0.0.24 0.0.23 0.0.22 0.0.21 0.0.20 0.0.19 0.0.18; do wget -c https://dl.discordapp.net/apps/linux/${pkgver}/discord-${pkgver}.deb && echo "${pkgver}" > /tmp/current_version.txt && break; done
           gpg --import private.key
           gpg --list-keys
           for code in jammy focal; do reprepro --basedir ubuntu includedeb ${code} discord-${pkgver}.deb; done
-          echo "::set-output name=version::$(pkgver)"
+          #echo "::set-output name=version::$(pkgver)"
         id: build
       - name: Upload
         if: ${{ github.ref == 'refs/heads/master' }}
@@ -24,7 +24,7 @@ jobs:
           mkdir -p /tmp/io/apt
           cp -rv ubuntu public.key /tmp/io/apt
           cd /tmp/io
-          echo "${{ steps.build.version }}" > current_version.txt
+          cp /tmp/current_version.txt .
           git diff --cached current_version.txt && exit 0
           touch .nojekyll
           git config user.email "support@gh.com"
