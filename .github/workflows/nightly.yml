@@ -3,6 +3,7 @@ on:
   push:
   schedule:
     - cron:  '0 0 * * *'
+    
 jobs:
   linux:
     runs-on: ubuntu-latest
