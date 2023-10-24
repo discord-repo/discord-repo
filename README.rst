@@ -7,7 +7,7 @@ Discord deb repo
 Usage::
 
     sudo apt install apt-transport-https curl
-    echo deb https://discord-repo.github.io/apt/ubuntu jammy main | sudo tee /etc/apt/sources.list.d/discord.list
+    echo deb [arch=amd64] https://discord-repo.github.io/apt/ubuntu jammy main | sudo tee /etc/apt/sources.list.d/discord.list
     curl -s https://discord-repo.github.io/apt/public.key | sudo apt-key add -
     sudo apt update
     sudo apt install discord
