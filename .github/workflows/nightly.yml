@@ -12,7 +12,7 @@ jobs:
       - name: Build
         run: |
           sudo apt-get -y install reprepro wget
-          for pkgver in 0.0.61 0.0.60 0.0.59 0.0.58 0.0.57 0.0.56; do wget -c https://dl.discordapp.net/apps/linux/${pkgver}/discord-${pkgver}.deb && echo "${pkgver}" > /tmp/current_version.txt && break; done
+          for pkgver in 0.0.70 0.0.69 0.0.68 0.0.67 0.0.66 0.0.65 0.0.64 0.0.63 0.0.62 0.0.61 0.0.60; do wget -c https://dl.discordapp.net/apps/linux/${pkgver}/discord-${pkgver}.deb && echo "${pkgver}" > /tmp/current_version.txt && break; done
           gpg --import private.key
           gpg --list-keys
           for code in jammy focal; do reprepro --basedir ubuntu includedeb ${code} discord-${pkgver}.deb; done
